@@ -1,0 +1,156 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@vetclinic.com",
+      "password": "admin123",
+      "name": "Admin User",
+      "role": "admin",
+      "token": "fake-admin-token-12345"
+    },
+    {
+      "id": 2,
+      "email": "vet@vetclinic.com",
+      "password": "vet123",
+      "name": "Dr. Veterinaire",
+      "role": "veterinaire",
+      "token": "fake-vet-token-67890"
+    }
+  ],
+  "owners": [
+    {
+      "id": 1,
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "phone": "0612345678",
+      "email": "jean.dupont@email.com",
+      "address": "123 Rue de Paris, 75001 Paris"
+    },
+    {
+      "id": 2,
+      "firstName": "Marie",
+      "lastName": "Martin",
+      "phone": "0698765432",
+      "email": "marie.martin@email.com",
+      "address": "45 Avenue des Champs, 69001 Lyon"
+    },
+    {
+      "id": 3,
+      "firstName": "Pierre",
+      "lastName": "Bernard",
+      "phone": "0623456789",
+      "email": "pierre.bernard@email.com",
+      "address": "78 Boulevard Victor Hugo, 33000 Bordeaux"
+    }
+  ],
+  "animals": [
+    {
+      "id": 1,
+      "name": "Max",
+      "species": "Chien",
+      "breed": "Labrador",
+      "birthDate": "2020-05-15",
+      "color": "Doré",
+      "weight": 30,
+      "ownerId": 1
+    },
+    {
+      "id": 2,
+      "name": "Luna",
+      "species": "Chat",
+      "breed": "Persan",
+      "birthDate": "2021-03-20",
+      "color": "Blanc",
+      "weight": 4,
+      "ownerId": 1
+    },
+    {
+      "id": 3,
+      "name": "Rocky",
+      "species": "Chien",
+      "breed": "Berger Allemand",
+      "birthDate": "2019-08-10",
+      "color": "Noir et Feu",
+      "weight": 35,
+      "ownerId": 2
+    },
+    {
+      "id": 4,
+      "name": "Minou",
+      "species": "Chat",
+      "breed": "Européen",
+      "birthDate": "2022-01-05",
+      "color": "Tigré",
+      "weight": 3.5,
+      "ownerId": 3
+    }
+  ],
+  "consultations": [
+    {
+      "id": 1,
+      "animalId": 1,
+      "date": "2024-01-15",
+      "reason": "Vaccination annuelle",
+      "diagnosis": "Animal en bonne santé",
+      "treatment": "Vaccin rage + vermifuge",
+      "notes": "Prochain rappel dans 1 an",
+      "veterinaire": "Dr. Veterinaire"
+    },
+    {
+      "id": 2,
+      "animalId": 1,
+      "date": "2024-02-20",
+      "reason": "Contrôle de routine",
+      "diagnosis": "Léger surpoids",
+      "treatment": "Régime alimentaire recommandé",
+      "notes": "Revoir dans 3 mois",
+      "veterinaire": "Dr. Veterinaire"
+    },
+    {
+      "id": 3,
+      "animalId": 2,
+      "date": "2024-01-10",
+      "reason": "Problème digestif",
+      "diagnosis": "Gastrite légère",
+      "treatment": "Antibiotiques + régime",
+      "notes": "Amélioration observée",
+      "veterinaire": "Dr. Veterinaire"
+    },
+    {
+      "id": 4,
+      "animalId": 3,
+      "date": "2024-03-05",
+      "reason": "Boiterie patte arrière",
+      "diagnosis": "Entorse légère",
+      "treatment": "Repos + anti-inflammatoires",
+      "notes": "Évolution positive",
+      "veterinaire": "Dr. Veterinaire"
+    }
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "consultationId": 1,
+      "name": "ordonnance_max_vaccination.pdf",
+      "type": "pdf",
+      "url": "/uploads/ordonnance_max_vaccination.pdf",
+      "uploadDate": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "consultationId": 2,
+      "name": "rapport_poids_max.pdf",
+      "type": "pdf",
+      "url": "/uploads/rapport_poids_max.pdf",
+      "uploadDate": "2024-02-20"
+    },
+    {
+      "id": 3,
+      "consultationId": 3,
+      "name": "xray_luna.jpg",
+      "type": "image",
+      "url": "/uploads/xray_luna.jpg",
+      "uploadDate": "2024-01-10"
+    }
+  ]
+}

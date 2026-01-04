@@ -1,16 +1,62 @@
-# React + Vite
+# VetClinic Manager - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application de gestion pour clinique vétérinaire.
 
-Currently, two official plugins are available:
+## 🚀 Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Installer les dépendances
+npm install
 
-## React Compiler
+# Lancer l'application (dev + fake API)
+npm run dev:all
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Ou séparément:
+npm run dev      # Frontend only (port 5173)
+npm run api      # Fake API only (port 8000)
+```
 
-## Expanding the ESLint configuration
+## 🔑 Comptes de test
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Admin:**
+- Email: `admin@vetclinic.com`
+- Password: `admin123`
+
+**Vétérinaire:**
+- Email: `vet@vetclinic.com`
+- Password: `vet123`
+
+## 📁 Structure
+
+```
+src/
+├── api/          # Services API
+├── components/   # Composants réutilisables
+├── pages/        # Pages de l'application
+└── App.jsx       # Configuration routes
+```
+
+## 🛠️ Technologies
+
+- **React** - UI Library
+- **React Router** - Navigation
+- **Axios** - HTTP Client
+- **Tailwind CSS** - Styling
+- **JSON Server** - Fake REST API
+- **Vite** - Build tool
+
+## 📝 MVP Features
+
+✅ Authentification
+✅ Gestion Propriétaires
+✅ Gestion Animaux
+✅ Gestion Consultations
+✅ Upload Documents
+
+## 🎨 Composants disponibles
+
+- `<Button />` - Boutons stylisés
+- `<Input />` - Champs de formulaire
+- `<Card />` - Cartes conteneurs
+- `<Table />` - Tableaux de données
+- `<Loading />` - Indicateur de chargement
