@@ -30,6 +30,7 @@ function App() {
         <Route path="/animals/:id" element={<ProtectedRoute><Navbar /><AnimalDetail /></ProtectedRoute>} />
 
         <Route path="/consultations" element={<ProtectedRoute><Navbar /><ConsultationsList /></ProtectedRoute>} />
+        <Route path="/consultations/new" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
         <Route path="/consultations/new/:animalId" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
         <Route path="/consultations/edit/:id" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
 
