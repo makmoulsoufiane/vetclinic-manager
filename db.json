@@ -41,6 +41,14 @@
       "phone": "0623456789",
       "email": "pierre.bernard@email.com",
       "address": "78 Boulevard Victor Hugo, 33000 Bordeaux"
+    },
+    {
+      "firstName": "azdin",
+      "lastName": "ahmad",
+      "phone": "12334343",
+      "email": "mak@gmail.com",
+      "address": "paris",
+      "id": 4
     }
   ],
   "animals": [
@@ -125,6 +133,16 @@
       "treatment": "Repos + anti-inflammatoires",
       "notes": "Évolution positive",
       "veterinaire": "Dr. Veterinaire"
+    },
+    {
+      "animalId": "1",
+      "date": "2026-01-05",
+      "reason": "contole",
+      "diagnosis": "contole",
+      "treatment": "....",
+      "notes": "",
+      "veterinaire": "Dr. Veterinaire soufiane",
+      "id": 5
     }
   ],
   "documents": [
