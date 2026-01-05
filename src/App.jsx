@@ -9,6 +9,8 @@ import AnimalsForm from "./pages/Animals/AnimalsForm";
 import AnimalDetail from "./pages/Animals/AnimalDetail";
 import ConsultationsList from "./pages/Consultations/ConsultationsList";
 import ConsultationsForm from "./pages/Consultations/ConsultationsForm";
+import DocumentsList from "./pages/Documents/DocumentsList";
+import DocumentsForm from "./pages/Documents/DocumentsForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 
@@ -33,6 +35,9 @@ function App() {
         <Route path="/consultations/new" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
         <Route path="/consultations/new/:animalId" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
         <Route path="/consultations/edit/:id" element={<ProtectedRoute><Navbar /><ConsultationsForm /></ProtectedRoute>} />
+
+        <Route path="/documents/:consultationId" element={<ProtectedRoute><Navbar /><DocumentsList /></ProtectedRoute>} />
+        <Route path="/documents/new/:consultationId" element={<ProtectedRoute><Navbar /><DocumentsForm /></ProtectedRoute>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

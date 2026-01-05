@@ -1,12 +1,27 @@
 import api from './axios.config';
 
 export const documentsAPI = {
-  upload: (consultationId, formData) =>
-    api.post(`/consultations/${consultationId}/documents`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-  getByConsultation: (consultationId) =>
-    api.get(`/consultations/${consultationId}/documents`),
+  upload: async (consultationId, formData) => {
+    // Simulate file upload to db.json
+    const file = formData.get('file');
+    const documentData = {
+      consultationId: parseInt(consultationId),
+      name: file.name,
+      type: file.type.includes('pdf') ? 'pdf' : 'image',
+      url: `/uploads/${file.name}`,
+      uploadDate: new Date().toISOString().split('T')[0]
+    };
+    return api.post('/documents', documentData);
+  },
+
+  getByConsultation: (consultationId) => {
+    return api.get(`/documents?consultationId=${consultationId}`);
+  },
+
   delete: (id) => api.delete(`/documents/${id}`),
-  download: (id) => api.get(`/documents/${id}/download`, { responseType: 'blob' }),
+
+  download: (id) => {
+    // Simulate download
+    return api.get(`/documents/${id}`);
+  },
 };
