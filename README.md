@@ -1,62 +1,30 @@
-# VetClinic Manager - Frontend
+VetClinic Manager 🐾
 
-Application de gestion pour clinique vétérinaire.
+Full-Stack Web Application (React + Laravel)
 
-## 🚀 Installation
+VetClinic Manager is a full-stack web application designed to manage a veterinary clinic, including owners, animals, consultations, and documents.
 
-```bash
-# Installer les dépendances
-npm install
+🧱 Project Architecture
+vetclinic-manager/
+├── frontend/   # React + Vite (UI)
+├── backend/    # Laravel (REST API)
+├── docs/
+└── README.md
 
-# Lancer l'application (dev + fake API)
-npm run dev:all
 
-# Ou séparément:
-npm run dev      # Frontend only (port 5173)
-npm run api      # Fake API only (port 8000)
-```
+Frontend: User interface built with React
 
-## 🔑 Comptes de test
+Backend: REST API and business logic built with Laravel
 
-**Admin:**
-- Email: `admin@vetclinic.com`
-- Password: `admin123`
+Database: MySQL (XAMPP)
 
-**Vétérinaire:**
-- Email: `vet@vetclinic.com`
-- Password: `vet123`
+🚀 Installation & Setup
+✅ Requirements
 
-## 📁 Structure
+Node.js ≥ 18
 
-```
-src/
-├── api/          # Services API
-├── components/   # Composants réutilisables
-├── pages/        # Pages de l'application
-└── App.jsx       # Configuration routes
-```
+PHP ≥ 8.1
 
-## 🛠️ Technologies
+Composer
 
-- **React** - UI Library
-- **React Router** - Navigation
-- **Axios** - HTTP Client
-- **Tailwind CSS** - Styling
-- **JSON Server** - Fake REST API
-- **Vite** - Build tool
-
-## 📝 MVP Features
-
-✅ Authentification
-✅ Gestion Propriétaires
-✅ Gestion Animaux
-✅ Gestion Consultations
-✅ Upload Documents
-
-## 🎨 Composants disponibles
-
-- `<Button />` - Boutons stylisés
-- `<Input />` - Champs de formulaire
-- `<Card />` - Cartes conteneurs
-- `<Table />` - Tableaux de données
-- `<Loading />` - Indicateur de chargement
+XAMPP (Apache + MySQL)
