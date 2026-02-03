@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +45,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relationship: A user (veterinarian) can have many consultations
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
+
+    // Helper method to check user role
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isVeterinarian(): bool
+    {
+        return $this->role === 'veterinarian';
     }
 }
