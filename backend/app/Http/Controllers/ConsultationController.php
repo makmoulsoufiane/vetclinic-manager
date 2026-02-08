@@ -14,7 +14,7 @@ class ConsultationController extends Controller
     {
         $query = Consultation::query();
 
-        if ($request->has('animal_id')) {
+        if($request->has('animal_id')) {
             $query->where('animal_id', $request->input('animal_id'));
         }
 

@@ -14,7 +14,7 @@ class AnimalController extends Controller
     {
         $query = Animal::query();
 
-        if ($request->has('owner_id')) {
+        if($request->has('owner_id')) {
             $query->where('owner_id', $request->input('owner_id'));
         }
 

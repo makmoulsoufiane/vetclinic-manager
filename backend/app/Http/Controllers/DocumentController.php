@@ -15,7 +15,7 @@ class DocumentController extends Controller
     {
         $query = Document::query();
 
-        if ($request->has('consultation_id')) {
+        if($request->has('consultation_id')) {
             $query->where('consultation_id', $request->input('consultation_id'));
         }
 
