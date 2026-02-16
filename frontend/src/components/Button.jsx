@@ -1,27 +1,33 @@
+import MuiButton from '@mui/material/Button';
+
 const Button = ({
   children,
   variant = 'primary',
   type = 'button',
   onClick,
   disabled,
-  className = ''
+  className = '',
 }) => {
-  const variants = {
-    primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-    secondary: 'bg-gray-600 hover:bg-gray-700 text-white',
-    danger: 'bg-red-600 hover:bg-red-700 text-white',
-    success: 'bg-green-600 hover:bg-green-700 text-white',
+  const variantMap = {
+    primary: { color: 'primary', variant: 'contained' },
+    secondary: { color: 'secondary', variant: 'outlined' },
+    danger: { color: 'error', variant: 'contained' },
+    success: { color: 'success', variant: 'contained' },
   };
 
+  const mapped = variantMap[variant] || variantMap.primary;
+
   return (
-    <button
+    <MuiButton
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`px-4 py-2 rounded font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${className}`}
+      color={mapped.color}
+      variant={mapped.variant}
+      className={className}
     >
       {children}
-    </button>
+    </MuiButton>
   );
 };
 

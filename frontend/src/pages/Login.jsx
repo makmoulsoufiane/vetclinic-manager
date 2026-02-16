@@ -21,7 +21,7 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/');
-    } catch (err) {
+    } catch {
       setError('Email ou mot de passe incorrect');
     } finally {
       setLoading(false);
@@ -68,8 +68,8 @@ const Login = () => {
 
         <div className="mt-6 p-4 bg-blue-50 rounded text-sm">
           <p className="font-semibold mb-2">Comptes de test :</p>
-          <p><strong>Admin:</strong> admin@vetclinic.com / admin123</p>
-          <p><strong>Vétérinaire:</strong> vet@vetclinic.com / vet123</p>
+          <p><strong>Admin:</strong> admin@vetclinic.com / password</p>
+          <p><strong>Vétérinaire:</strong> doctor@vetclinic.com / password</p>
         </div>
       </div>
     </div>

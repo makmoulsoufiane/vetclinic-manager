@@ -30,7 +30,7 @@ class ConsultationController extends Controller
     {
         $validated = $request->validate([
             'animal_id' => 'required|exists:animals,id',
-            'date_consultation' => 'required|datetime',
+            'date_consultation' => 'required|date',
             'motif' => 'required|string|max:255',
             'diagnostic' => 'nullable|string',
             'traitement' => 'nullable|string',
@@ -59,7 +59,7 @@ class ConsultationController extends Controller
     public function update(Request $request, Consultation $consultation)
     {
         $validated = $request->validate([
-            'date_consultation' => 'sometimes|datetime',
+            'date_consultation' => 'sometimes|date',
             'motif' => 'sometimes|string|max:255',
             'diagnostic' => 'sometimes|string',
             'traitement' => 'sometimes|string',

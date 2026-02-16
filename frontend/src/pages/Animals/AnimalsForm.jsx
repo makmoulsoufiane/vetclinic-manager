@@ -6,6 +6,8 @@ import Card from '../../components/Card';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
 const AnimalsForm = () => {
   const navigate = useNavigate();
@@ -17,9 +19,9 @@ const AnimalsForm = () => {
     species: '',
     breed: '',
     birthDate: '',
-    color: '',
-    weight: '',
-    ownerId: ''
+    sex: 'male',
+    identificationNumber: '',
+    ownerId: '',
   });
 
   useEffect(() => {
@@ -64,16 +66,10 @@ const AnimalsForm = () => {
     setLoading(true);
 
     try {
-      const dataToSend = {
-        ...formData,
-        weight: parseFloat(formData.weight),
-        ownerId: parseInt(formData.ownerId)
-      };
-
       if (id) {
-        await animalsAPI.update(id, dataToSend);
+        await animalsAPI.update(id, formData);
       } else {
-        await animalsAPI.create(dataToSend);
+        await animalsAPI.create(formData);
       }
       navigate('/animals');
     } catch (error) {
@@ -100,20 +96,23 @@ const AnimalsForm = () => {
             <label className="block text-gray-700 font-medium mb-2">
               Propriétaire <span className="text-red-500">*</span>
             </label>
-            <select
+            <TextField
+              select
+              fullWidth
+              margin="normal"
+              label="Propriétaire"
               name="ownerId"
               value={formData.ownerId}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Sélectionner un propriétaire</option>
+              <MenuItem value="">Sélectionner un propriétaire</MenuItem>
               {owners.map(owner => (
-                <option key={owner.id} value={owner.id}>
+                <MenuItem key={owner.id} value={owner.id}>
                   {owner.firstName} {owner.lastName} - {owner.phone}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -160,25 +159,27 @@ const AnimalsForm = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              label="Couleur"
-              type="text"
-              name="color"
-              value={formData.color}
+            <TextField
+              select
+              fullWidth
+              margin="normal"
+              label="Sexe"
+              name="sex"
+              value={formData.sex}
               onChange={handleChange}
-              placeholder="Doré, Noir, Blanc, etc."
               required
-            />
+            >
+              <MenuItem value="male">Mâle</MenuItem>
+              <MenuItem value="female">Femelle</MenuItem>
+            </TextField>
 
             <Input
-              label="Poids (kg)"
-              type="number"
-              step="0.1"
-              name="weight"
-              value={formData.weight}
+              label="N° d'identification"
+              type="text"
+              name="identificationNumber"
+              value={formData.identificationNumber}
               onChange={handleChange}
-              placeholder="30"
-              required
+              placeholder="Ex: 250269500123456"
             />
           </div>
 

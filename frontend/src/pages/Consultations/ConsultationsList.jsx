@@ -42,7 +42,6 @@ const ConsultationsList = () => {
     { header: 'Animal ID', field: 'animalId' },
     { header: 'Motif', field: 'reason' },
     { header: 'Diagnostic', field: 'diagnosis' },
-    { header: 'Vétérinaire', field: 'veterinaire' },
   ];
 
   return (

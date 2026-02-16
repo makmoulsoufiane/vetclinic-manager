@@ -1,31 +1,34 @@
 import api from './axios.config';
+import { extractEntity } from './transformers';
 
 export const authAPI = {
-  login: async (credentials) => {
-    // Simulate login with fake API
-    const response = await api.get('/users');
-    const user = response.data.find(
-      u => u.email === credentials.email && u.password === credentials.password
-    );
-
-    if (user) {
+  login: (credentials) =>
+    api.post('/auth/login', credentials).then((response) => {
+      const user = extractEntity(response.data, 'user');
       return {
+        ...response,
         data: {
-          token: user.token,
+          token: response.data?.token,
           user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-          }
-        }
+            id: user?.id,
+            name: user?.fullName || '',
+            fullName: user?.fullName || '',
+            email: user?.email || '',
+            role: user?.role || '',
+          },
+        },
       };
-    }
-    throw new Error('Invalid credentials');
-  },
-  logout: () => Promise.resolve(),
-  me: () => {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return Promise.resolve({ data: user });
-  },
+    }),
+  logout: () => api.post('/auth/logout'),
+  me: () =>
+    api.get('/user').then((response) => ({
+      ...response,
+      data: {
+        id: response.data?.id,
+        name: response.data?.fullName || '',
+        fullName: response.data?.fullName || '',
+        email: response.data?.email || '',
+        role: response.data?.role || '',
+      },
+    })),
 };

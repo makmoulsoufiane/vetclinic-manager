@@ -1,45 +1,54 @@
+import {
+  Table as MuiTable,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Stack,
+} from '@mui/material';
+
 const Table = ({ columns, data, actions }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-gray-100">
-          <tr>
+    <TableContainer>
+      <MuiTable size="small">
+        <TableHead>
+          <TableRow>
             {columns.map((col, idx) => (
-              <th key={idx} className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                {col.header}
-              </th>
+              <TableCell key={idx}>{col.header}</TableCell>
             ))}
-            {actions && <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
+            {actions && <TableCell>Actions</TableCell>}
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {data.length === 0 ? (
-            <tr>
-              <td colSpan={columns.length + (actions ? 1 : 0)} className="px-6 py-4 text-center text-gray-500">
-                Aucune donnée disponible
-              </td>
-            </tr>
+            <TableRow>
+              <TableCell colSpan={columns.length + (actions ? 1 : 0)} align="center">
+                <Typography color="text.secondary">Aucune donnée disponible</Typography>
+              </TableCell>
+            </TableRow>
           ) : (
-            data.map((row, rowIdx) => (
-              <tr key={rowIdx} className="hover:bg-gray-50 border-b">
+            data.map((row) => (
+              <TableRow key={row.id}>
                 {columns.map((col, colIdx) => (
-                  <td key={colIdx} className="px-6 py-4 text-sm text-gray-800">
+                  <TableCell key={colIdx}>
                     {col.render ? col.render(row) : row[col.field]}
-                  </td>
+                  </TableCell>
                 ))}
                 {actions && (
-                  <td className="px-6 py-4 text-sm">
-                    <div className="flex gap-2">
+                  <TableCell>
+                    <Stack direction="row" spacing={1}>
                       {actions(row)}
-                    </div>
-                  </td>
+                    </Stack>
+                  </TableCell>
                 )}
-              </tr>
+              </TableRow>
             ))
           )}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </MuiTable>
+    </TableContainer>
   );
 };
 

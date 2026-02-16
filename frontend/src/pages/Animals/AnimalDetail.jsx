@@ -29,11 +29,8 @@ const AnimalDetail = () => {
       const ownerResponse = await ownersAPI.getById(animalData.ownerId);
       setOwner(ownerResponse.data);
 
-      const consultationsResponse = await consultationsAPI.getAll();
-      const animalConsultations = consultationsResponse.data.filter(
-        c => c.animalId === parseInt(id)
-      );
-      setConsultations(animalConsultations);
+      const consultationsResponse = await consultationsAPI.getByAnimal(id);
+      setConsultations(consultationsResponse.data);
     } catch (error) {
       console.error('Error fetching animal details:', error);
     } finally {
@@ -56,7 +53,6 @@ const AnimalDetail = () => {
     { header: 'Date', field: 'date' },
     { header: 'Motif', field: 'reason' },
     { header: 'Diagnostic', field: 'diagnosis' },
-    { header: 'Vétérinaire', field: 'veterinaire' },
   ];
 
   if (loading) {
@@ -114,12 +110,12 @@ const AnimalDetail = () => {
               <p className="font-semibold">{animal.birthDate} ({calculateAge(animal.birthDate)} ans)</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Couleur</p>
-              <p className="font-semibold">{animal.color}</p>
+              <p className="text-sm text-gray-600">Sexe</p>
+              <p className="font-semibold">{animal.sex === 'female' ? 'Femelle' : 'Mâle'}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Poids</p>
-              <p className="font-semibold">{animal.weight} kg</p>
+              <p className="text-sm text-gray-600">N° d'identification</p>
+              <p className="font-semibold">{animal.identificationNumber || 'Non renseigné'}</p>
             </div>
           </div>
         </Card>

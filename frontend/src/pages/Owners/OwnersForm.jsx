@@ -5,6 +5,7 @@ import Card from '../../components/Card';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
+import TextField from '@mui/material/TextField';
 
 const OwnersForm = () => {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ const OwnersForm = () => {
     lastName: '',
     phone: '',
     email: '',
-    address: ''
+    address: '',
+    city: '',
   });
 
   useEffect(() => {
@@ -121,19 +123,28 @@ const OwnersForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">
-              Adresse <span className="text-red-500">*</span>
-            </label>
-            <textarea
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              label="Adresse"
               name="address"
               value={formData.address}
               onChange={handleChange}
               required
-              rows="3"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="123 Rue de Paris, 75001 Paris"
             />
           </div>
+
+          <Input
+            label="Ville"
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            placeholder="Paris"
+            required
+            />
 
           <div className="flex gap-4 mt-6">
             <Button type="submit" disabled={loading}>

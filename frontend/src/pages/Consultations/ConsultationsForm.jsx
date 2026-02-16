@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { consultationsAPI } from '../../api/consultations.api';
 import { animalsAPI } from '../../api/animals.api';
 import { documentsAPI } from '../../api/documents.api';
@@ -23,7 +23,6 @@ const ConsultationsForm = () => {
     diagnosis: '',
     treatment: '',
     notes: '',
-    veterinaire: 'Dr. Veterinaire'
   });
 
   useEffect(() => {
@@ -238,15 +237,6 @@ const ConsultationsForm = () => {
               placeholder="Notes supplémentaires..."
             />
           </div>
-
-          <Input
-            label="Vétérinaire"
-            type="text"
-            name="veterinaire"
-            value={formData.veterinaire}
-            onChange={handleChange}
-            required
-          />
 
           <div className="flex gap-4 mt-6">
             <Button type="submit" disabled={loading}>

@@ -1,8 +1,11 @@
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+
 const Card = ({ children, className = '' }) => {
   return (
-    <div className={`bg-white rounded-lg shadow-md p-6 ${className}`}>
-      {children}
-    </div>
+    <Paper elevation={2} className={className}>
+      <Box sx={{ p: 3 }}>{children}</Box>
+    </Paper>
   );
 };
 
