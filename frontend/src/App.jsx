@@ -11,6 +11,7 @@ import ConsultationsList from "./pages/Consultations/ConsultationsList";
 import ConsultationsForm from "./pages/Consultations/ConsultationsForm";
 import DocumentsList from "./pages/Documents/DocumentsList";
 import DocumentsForm from "./pages/Documents/DocumentsForm";
+import VeterinariansPage from "./pages/Admin/VeterinariansPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 
@@ -38,6 +39,15 @@ function App() {
 
         <Route path="/documents/:consultationId" element={<ProtectedRoute><Navbar /><DocumentsList /></ProtectedRoute>} />
         <Route path="/documents/new/:consultationId" element={<ProtectedRoute><Navbar /><DocumentsForm /></ProtectedRoute>} />
+        <Route
+          path="/admin/veterinarians"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <Navbar />
+              <VeterinariansPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

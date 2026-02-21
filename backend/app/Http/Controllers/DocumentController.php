@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,6 +15,13 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $query = Document::query();
+        $user = $request->user();
+
+        if ($user->isVeterinarian()) {
+            $query->whereHas('consultation.animal.owner', function ($builder) use ($user) {
+                $builder->where('veterinarian_id', $user->id);
+            });
+        }
 
         if($request->has('consultation_id')) {
             $query->where('consultation_id', $request->input('consultation_id'));
@@ -29,11 +37,17 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $validated = $request->validate([
             'consultation_id' => 'required|exists:consultations,id',
             'fichier' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // 10MB max
             'notes' => 'nullable|string',
         ]);
+
+        $consultation = \App\Models\Consultation::with('animal.owner')->findOrFail($validated['consultation_id']);
+        if ($user->isVeterinarian() && $consultation->animal?->owner?->veterinarian_id !== $user->id) {
+            abort(403);
+        }
 
         // Store the file
         $file = $request->file('fichier');
@@ -60,6 +74,8 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
+        $this->authorizeDocument(request()->user(), $document);
+
         return response()->json($document);
     }
 
@@ -68,6 +84,8 @@ class DocumentController extends Controller
      */
     public function download(Document $document)
     {
+        $this->authorizeDocument(request()->user(), $document);
+
         if (!Storage::disk('public')->exists($document->chemin)) {
             return response()->json([
                 'message' => 'Document not found',
@@ -82,6 +100,8 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+        $this->authorizeDocument(request()->user(), $document);
+
         // Delete file from storage
         if (Storage::disk('public')->exists($document->chemin)) {
             Storage::disk('public')->delete($document->chemin);
@@ -92,5 +112,14 @@ class DocumentController extends Controller
         return response()->json([
             'message' => 'Document deleted successfully',
         ]);
+    }
+
+    private function authorizeDocument(User $user, Document $document): void
+    {
+        $document->loadMissing('consultation.animal.owner');
+
+        if ($user->isVeterinarian() && $document->consultation?->animal?->owner?->veterinarian_id !== $user->id) {
+            abort(403);
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class OwnerFactory extends Factory
     public function definition(): array
     {
         return [
+            'veterinarian_id' => User::factory()->veterinarian(),
             'fullName' => fake()->name(),
             'telephone' => fake()->phoneNumber(),
             'email' => fake()->safeEmail(),

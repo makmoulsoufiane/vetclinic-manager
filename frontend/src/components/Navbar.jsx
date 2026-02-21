@@ -11,6 +11,8 @@ import { authAPI } from '../api/auth.api';
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const isAdmin = user?.role === 'admin';
 
   const handleLogout = async () => {
     try {
@@ -29,6 +31,7 @@ const Navbar = () => {
     { to: '/owners', label: 'Propriétaires' },
     { to: '/animals', label: 'Animaux' },
     { to: '/consultations', label: 'Consultations' },
+    ...(isAdmin ? [{ to: '/admin/veterinarians', label: 'Vétérinaires' }] : []),
   ];
 
   return (

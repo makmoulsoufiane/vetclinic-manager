@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
+use App\Models\Owner;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
@@ -13,6 +15,13 @@ class AnimalController extends Controller
     public function index(Request $request)
     {
         $query = Animal::query();
+        $user = $request->user();
+
+        if ($user->isVeterinarian()) {
+            $query->whereHas('owner', function ($builder) use ($user) {
+                $builder->where('veterinarian_id', $user->id);
+            });
+        }
 
         if($request->has('owner_id')) {
             $query->where('owner_id', $request->input('owner_id'));
@@ -28,6 +37,7 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'espece' => 'required|string|max:255',
@@ -37,6 +47,12 @@ class AnimalController extends Controller
             'numero_identification' => 'nullable|string|max:255|unique:animals',
             'owner_id' => 'required|exists:owners,id',
         ]);
+
+        $owner = Owner::findOrFail($validated['owner_id']);
+
+        if ($user->isVeterinarian() && $owner->veterinarian_id !== $user->id) {
+            abort(403);
+        }
 
         $animal = Animal::create($validated);
 
@@ -51,6 +67,8 @@ class AnimalController extends Controller
      */
     public function show(Animal $animal)
     {
+        $this->authorizeAnimal(request()->user(), $animal);
+
         return response()->json($animal);
     }
 
@@ -59,6 +77,8 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
+        $this->authorizeAnimal($request->user(), $animal);
+
         $validated = $request->validate([
             'nom' => 'sometimes|string|max:255',
             'espece' => 'sometimes|string|max:255',
@@ -81,6 +101,8 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
+        $this->authorizeAnimal(request()->user(), $animal);
+
         $animal->delete();
 
         return response()->json([
@@ -93,8 +115,17 @@ class AnimalController extends Controller
      */
     public function getConsultations(Animal $animal)
     {
+        $this->authorizeAnimal(request()->user(), $animal);
+
         return response()->json(
             $animal->consultations()->get()
         );
+    }
+
+    private function authorizeAnimal(User $user, Animal $animal): void
+    {
+        if ($user->isVeterinarian() && $animal->owner?->veterinarian_id !== $user->id) {
+            abort(403);
+        }
     }
 }

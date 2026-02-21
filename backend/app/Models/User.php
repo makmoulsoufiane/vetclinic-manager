@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable,HasApiTokens;
+
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_VETERINARIAN = 'veterinarian';
     /**
      * The attributes that are mass assignable.
      *
@@ -52,6 +55,11 @@ class User extends Authenticatable
         return $this->hasMany(Consultation::class);
     }
 
+    public function owners()
+    {
+        return $this->hasMany(Owner::class, 'veterinarian_id');
+    }
+
     // Helper method to check user role
     public function hasRole(string $role): bool
     {
@@ -60,11 +68,11 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === self::ROLE_ADMIN;
     }
 
     public function isVeterinarian(): bool
     {
-        return $this->role === 'veterinarian';
+        return $this->role === self::ROLE_VETERINARIAN;
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Animal;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -43,6 +44,7 @@ class ConsultationFactory extends Factory
 
         return [
             'animal_id' => Animal::factory(),
+            'user_id' => User::factory()->veterinarian(),
             'date_consultation' => fake()->dateTimeBetween('-6 months', 'now'),
             'motif' => fake()->randomElement($motifs),
             'diagnostic' => fake()->randomElement($diagnostics),

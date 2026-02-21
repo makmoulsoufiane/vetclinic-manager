@@ -10,6 +10,7 @@ class Owner extends Model
     use HasFactory;
 
     protected $fillable = [
+        'veterinarian_id',
         'fullName',
         'telephone',
         'email',
@@ -21,5 +22,10 @@ class Owner extends Model
     public function animals()
     {
         return $this->hasMany(Animal::class);
+    }
+
+    public function veterinarian()
+    {
+        return $this->belongsTo(User::class, 'veterinarian_id');
     }
 }
