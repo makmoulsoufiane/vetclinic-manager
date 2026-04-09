@@ -48,14 +48,14 @@ class OwnerController extends Controller
         ];
 
         if ($user->isAdmin()) {
-            $rules['veterinarian_id'] = 'required|exists:users,id';
+            $rules['veterinarian_id'] = 'nullable|exists:users,id';
         }
 
         $validated = $request->validate($rules);
 
         if ($user->isVeterinarian()) {
             $validated['veterinarian_id'] = $user->id;
-        } else {
+        } elseif (!empty($validated['veterinarian_id'])) {
             $veterinarian = User::find($validated['veterinarian_id']);
             if (!$veterinarian || !$veterinarian->isVeterinarian()) {
                 return response()->json([

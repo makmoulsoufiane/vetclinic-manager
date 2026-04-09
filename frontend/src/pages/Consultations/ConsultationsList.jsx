@@ -81,6 +81,12 @@ const ConsultationsList = () => {
           />
         )}
       </Card>
+
+      <div className="flex justify-end mt-6">
+        <Link to="/">
+          <Button>+ Return</Button>
+        </Link>
+      </div>
     </div>
   );
 };

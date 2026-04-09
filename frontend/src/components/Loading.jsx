@@ -1,11 +1,9 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
-
 const Loading = ({ message = 'Chargement...' }) => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', py: 4, gap: 2 }}>
-      <CircularProgress />
-      <Typography color="text.secondary">{message}</Typography>
-    </Box>
+    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-4 px-6 py-12 text-center">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#c8def5] border-t-[#173d70]" />
+      <p className="text-sm font-medium tracking-[0.12em] text-slate-500 uppercase">{message}</p>
+    </div>
   );
 };
 

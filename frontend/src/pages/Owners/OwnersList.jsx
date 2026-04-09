@@ -59,6 +59,10 @@ const OwnersList = () => {
         </Link>
       </div>
 
+
+
+
+
       <Card className="mb-6">
         <input
           type="text"
@@ -97,8 +101,15 @@ const OwnersList = () => {
           />
         )}
       </Card>
+
+      <div className="flex justify-end mt-6">
+        <Link to="/">
+          <Button>- Return into Dashboard</Button>
+        </Link>
+      </div>
     </div>
   );
 };
+
 
 export default OwnersList;

@@ -68,6 +68,8 @@ const AnimalsList = () => {
         </Link>
       </div>
 
+
+
       <Card>
         {loading ? (
           <Loading />
@@ -103,6 +105,11 @@ const AnimalsList = () => {
           />
         )}
       </Card>
+      <div className="flex justify-end mt-6">
+        <Link to="/">
+          <Button>+ Return into Dashboard</Button>
+        </Link>
+      </div>
     </div>
   );
 };
