@@ -11,6 +11,8 @@ const AnimalsList = () => {
   const [animals, setAnimals] = useState([]);
   const [owners, setOwners] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +61,10 @@ const AnimalsList = () => {
     },
   ];
 
+  const filteredAnimals = animals.filter(animal =>
+    animal.name?.toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
@@ -68,7 +74,15 @@ const AnimalsList = () => {
         </Link>
       </div>
 
-
+    <Card className="mb-6">
+        <input
+          type="text"
+          placeholder="Rechercher Nom..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </Card>
 
       <Card>
         {loading ? (
@@ -76,7 +90,7 @@ const AnimalsList = () => {
         ) : (
           <Table
             columns={columns}
-            data={animals}
+            data={filteredAnimals}
             actions={(animal) => (
               <>
                 <Button

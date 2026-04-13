@@ -9,6 +9,7 @@ import Loading from '../../components/Loading';
 const ConsultationsList = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +45,13 @@ const ConsultationsList = () => {
     { header: 'Diagnostic', field: 'diagnosis' },
   ];
 
+
+  const filteredConsultations = consultations.filter(consultation =>
+    consultation.date?.toLowerCase().includes(search.toLowerCase()) ||
+    consultation.reason?.toLowerCase().includes(search.toLowerCase())
+  )
+
+
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
@@ -53,13 +61,24 @@ const ConsultationsList = () => {
         </Link>
       </div>
 
+
+      <Card className="mb-6">
+        <input
+          type="text"
+          placeholder="Rechercher Date..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </Card>
+
       <Card>
         {loading ? (
           <Loading />
         ) : (
           <Table
             columns={columns}
-            data={consultations}
+            data={filteredConsultations}
             actions={(consultation) => (
               <>
                 <Button
