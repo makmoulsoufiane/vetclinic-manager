@@ -1,0 +1,73 @@
+.login-page {
+  background:
+    radial-gradient(circle at top left, rgba(108, 183, 203, 0.2), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(31, 95, 206, 0.18), transparent 30%),
+    linear-gradient(180deg, #edf5fc 0%, #dfeeff 100%);
+}
+
+.landing-hero {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 28%),
+    linear-gradient(135deg, #173f76 0%, #235f97 54%, #7ad1cd 100%);
+  box-shadow: 0 28px 70px rgba(17, 45, 86, 0.2);
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -35% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  filter: blur(10px);
+}
+
+.landing-card {
+  border: 1px solid rgba(199, 216, 238, 0.8);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 255, 0.92));
+  box-shadow: 0 20px 50px rgba(56, 84, 128, 0.1);
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms ease,
+    background 260ms ease;
+  transform: translateY(0) scale(1);
+  transform-origin: center;
+  will-change: transform, box-shadow;
+}
+
+.landing-card:hover {
+  transform: translateY(-6px) scale(1.025);
+  box-shadow: 0 28px 64px rgba(42, 78, 129, 0.18);
+  border-color: rgba(163, 193, 235, 0.95);
+}
+
+.cards-grid {
+  justify-items: center;
+}
+
+.cards-grid .landing-card {
+  width: 100%;
+  max-width: 320px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-card {
+    transition: none;
+  }
+
+  .landing-card:hover {
+    transform: none;
+  }
+}
+
+.login-panel {
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.93));
+  box-shadow: 0 24px 60px rgba(44, 74, 122, 0.14);
+}

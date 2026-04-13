@@ -137,7 +137,7 @@ const Dashboard = () => {
           {statCards.map(({ label, value, icon: Icon, iconClass, accentClass, borderClass }) => (
             <article
               key={label}
-              className={`relative overflow-hidden rounded-[26px] border border-slate-200/80 bg-white/90 p-6 shadow-[0_18px_45px_rgba(26,55,90,0.1)] backdrop-blur before:absolute before:inset-x-0 before:bottom-0 before:h-1.5 ${borderClass}`}
+              className={`relative overflow-hidden rounded-[26px] border border-slate-200/80 bg-white/90 p-6 shadow-[0_18px_45px_rgba(26,55,90,0.1)]  before:absolute before:inset-x-0 before:bottom-0 before:h-1.5 ${borderClass}`}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${accentClass} opacity-35`} />
               <div className="relative flex items-center gap-4">
